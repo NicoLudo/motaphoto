@@ -1,0 +1,82 @@
+/*
+Theme Name: Motaphoto
+Theme URI: https://github.com/NicoLudo/motaphoto
+Author: NicoLudo
+Description: Thème custom pour le site de Nathalie Mota.
+Version: 0.1.0
+Requires at least: 6.0
+Requires PHP: 8.0
+Text Domain: motaphoto
+*/
+
+/* Base provisoire : le design de la maquette sera ajouté progressivement. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    background: #fff;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+}
+
+.site-header,
+.site-main,
+.site-footer {
+    width: min(100% - 40px, 1148px);
+    margin-inline: auto;
+}
+
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 24px;
+    border-bottom: 1px solid #ddd;
+}
+
+.site-name {
+    color: #e00000;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.site-main {
+    flex: 1;
+    padding-block: 60px;
+}
+
+h1 {
+    line-height: 1.2;
+}
+
+.site-footer {
+    padding-block: 20px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+}

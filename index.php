@@ -1,5 +1,5 @@
 <?php
-/** Premier affichage du thème, remplacé progressivement par les templates. */
+// Page de test
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }

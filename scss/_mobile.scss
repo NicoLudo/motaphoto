@@ -1,0 +1,110 @@
+@media (max-width: 767px) {
+    :root {
+        --header-height: 72px;
+    }
+
+    .header-inner {
+        flex-wrap: wrap;
+    }
+
+    .site-logo img {
+        width: 138px;
+    }
+
+    .main-menu {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    // Menu sans JavaScript
+    .primary-navigation {
+        width: 100%;
+        padding-block: 20px;
+    }
+
+    .js .header-inner {
+        flex-wrap: nowrap;
+    }
+
+    .js .menu-toggle {
+        position: relative;
+        z-index: 32;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin-right: -8px;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        width: 27px;
+        height: 1px;
+        background: #000;
+        transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .is-menu-open .menu-toggle span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .is-menu-open .menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .is-menu-open .menu-toggle span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .js .primary-navigation {
+        position: fixed;
+        z-index: 29;
+        inset: var(--menu-top, var(--header-height)) 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto;
+        padding: 40px 20px;
+        background: var(--color-red);
+        color: #fff;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-16px);
+        transition: opacity 250ms ease, transform 250ms ease, visibility 250ms step-end;
+        pointer-events: none;
+    }
+
+    .is-menu-open {
+        overflow: hidden;
+    }
+
+    .is-menu-open .primary-navigation {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 250ms ease, transform 250ms ease, visibility 0s;
+        pointer-events: auto;
+    }
+
+    .js .main-menu a {
+        justify-content: center;
+        font-size: 44px;
+        line-height: 1.5;
+    }
+
+    .js .main-menu a:hover {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+    }
+
+    .primary-navigation :focus-visible {
+        outline-color: #fff;
+    }
+}

@@ -1,82 +1,279 @@
+@charset "UTF-8";
 /*
 Theme Name: Motaphoto
 Theme URI: https://github.com/NicoLudo/motaphoto
 Author: NicoLudo
-Description: Thème custom pour le site de Nathalie Mota.
-Version: 0.1.0
+Description: Thème custom pour le site de Nathalie Mota
+Version: 0.2.0
 Requires at least: 6.0
 Requires PHP: 8.0
 Text Domain: motaphoto
 */
+@font-face {
+  font-family: "Space Mono";
+  src: url("assets/fonts/spacemono/SpaceMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("assets/fonts/spacemono/SpaceMono-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("assets/fonts/spacemono/SpaceMono-BoldItalic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/poppins/Poppins-Light.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/poppins/Poppins-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/poppins/Poppins-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+:root {
+  --color-red: #e00000;
+  --header-height: 80px;
+}
 
-/* Base provisoire : le design de la maquette sera ajouté progressivement. */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    color: #000;
-    background: #fff;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  background: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 a {
-    color: inherit;
+  color: inherit;
 }
 
-.site-header,
 .site-main,
 .site-footer {
-    width: min(100% - 40px, 1148px);
-    margin-inline: auto;
-}
-
-.site-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding-block: 24px;
-    border-bottom: 1px solid #ddd;
-}
-
-.site-name {
-    color: #e00000;
-    font-weight: bold;
-    letter-spacing: 3px;
-    text-decoration: none;
-}
-
-.menu {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
+  width: min(100% - 40px, 1148px);
+  margin-inline: auto;
 }
 
 .site-main {
-    flex: 1;
-    padding-block: 60px;
+  flex: 1;
+  padding-block: 60px;
 }
 
 h1 {
-    line-height: 1.2;
+  line-height: 1.2;
+}
+
+.site-header {
+  position: relative;
+  z-index: 30;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.header-inner {
+  position: relative;
+  width: min(100% - 80px, 1148px);
+  min-height: var(--header-height);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.site-logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  min-height: 44px;
+}
+.site-logo .custom-logo-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.site-logo img {
+  display: block;
+  width: 216px;
+  height: auto;
+}
+
+.main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 45px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.main-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 200ms ease;
+}
+.main-menu a:hover {
+  color: var(--color-red);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 5px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100000;
+  padding: 10px 16px;
+  background: #fff;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 .site-footer {
-    padding-block: 20px;
-    border-top: 1px solid #ddd;
-    text-align: center;
+  padding-block: 20px;
+  border-top: 1px solid #ddd;
+  text-align: center;
 }
 
 .site-footer p {
-    margin: 0;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 72px;
+  }
+  .header-inner {
+    flex-wrap: wrap;
+  }
+  .site-logo img {
+    width: 138px;
+  }
+  .main-menu {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .primary-navigation {
+    width: 100%;
+    padding-block: 20px;
+  }
+  .js .header-inner {
+    flex-wrap: nowrap;
+  }
+  .js .menu-toggle {
+    position: relative;
+    z-index: 32;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-right: -8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    width: 27px;
+    height: 1px;
+    background: #000;
+    transition: transform 250ms ease, opacity 250ms ease;
+  }
+  .is-menu-open .menu-toggle span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .is-menu-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  .is-menu-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  .js .primary-navigation {
+    position: fixed;
+    z-index: 29;
+    inset: var(--menu-top, var(--header-height)) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 40px 20px;
+    background: var(--color-red);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 250ms ease, transform 250ms ease, visibility 250ms step-end;
+    pointer-events: none;
+  }
+  .is-menu-open {
+    overflow: hidden;
+  }
+  .is-menu-open .primary-navigation {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 250ms ease, transform 250ms ease, visibility 0s;
+    pointer-events: auto;
+  }
+  .js .main-menu a {
+    justify-content: center;
+    font-size: 44px;
+    line-height: 1.5;
+  }
+  .js .main-menu a:hover {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+  }
+  .primary-navigation :focus-visible {
+    outline-color: #fff;
+  }
 }

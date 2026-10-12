@@ -1,9 +1,53 @@
 .site-footer {
-    padding-block: 20px;
-    border-top: 1px solid #ddd;
-    text-align: center;
+    width: 100%;
+    border-top: 1px solid #000;
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    p {
+        margin: 0;
+    }
 }
 
-.site-footer p {
+.footer-inner,
+.footer-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 86px;
+}
+
+.footer-inner {
+    min-height: 40px;
+    padding-inline: 20px;
+}
+
+.footer-menu {
     margin: 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+        text-decoration: none;
+        transition: color 200ms ease;
+
+        &:hover {
+            color: var(--color-red);
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-inner,
+    .footer-menu {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer-inner {
+        padding: 40px 20px;
+    }
 }

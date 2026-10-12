@@ -23,15 +23,11 @@ a {
     color: inherit;
 }
 
-.site-main,
-.site-footer {
-    width: min(100% - 40px, 1148px);
-    margin-inline: auto;
-}
-
 .site-main {
     flex: 1;
     padding-block: 60px;
+    width: min(100% - 40px, 1148px);
+    margin-inline: auto;
 }
 
 h1 {

@@ -72,3 +72,54 @@ if (menuToggle && navigation && header) {
         }
     });
 }
+
+// Fenêtre de contact
+const contactModal = document.getElementById('contact-modal');
+let contactTrigger = null;
+
+if (contactModal) {
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href="#contact"]');
+
+        if (!link) return;
+
+        event.preventDefault();
+        contactTrigger = link;
+
+        contactModal.showModal();
+        document.body.classList.add('is-contact-open');
+        contactModal.querySelector('input[name="your-name"]')?.focus();
+    });
+
+    contactModal.querySelector('.contact-close').addEventListener('click', () => {
+        contactModal.close();
+    });
+
+    contactModal.addEventListener('click', (event) => {
+        if (event.target !== contactModal) return;
+
+        const box = contactModal.getBoundingClientRect();
+
+        if (
+            event.clientX < box.left ||
+            event.clientX > box.right ||
+            event.clientY < box.top ||
+            event.clientY > box.bottom
+        ) {
+            contactModal.close();
+        }
+    });
+
+    contactModal.addEventListener('close', () => {
+        document.body.classList.remove('is-contact-open');
+
+        if (
+            contactTrigger?.closest('.primary-navigation') &&
+            window.matchMedia('(max-width: 767px)').matches
+        ) {
+            menuToggle?.focus();
+        } else {
+            contactTrigger?.focus();
+        }
+    });
+}

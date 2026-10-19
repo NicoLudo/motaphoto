@@ -25,6 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 </footer>
 
+<?php get_template_part( 'template-parts/contact-modal' ); ?>
+
 <?php wp_footer(); ?>
 
 </body>

@@ -312,3 +312,172 @@ h1 {
     outline-color: #fff;
   }
 }
+.contact-modal {
+  width: min(600px, 100% - 40px);
+  max-height: calc(100dvh - 40px);
+  padding: 0;
+  border: 5px solid #000;
+  background: #fff;
+  overflow-y: auto;
+}
+.contact-modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+.contact-modal[open], .contact-modal[open]::backdrop {
+  animation: contact-appear 0.2s ease-out;
+}
+.contact-modal .contact-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: #000;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.contact-modal .contact-banner {
+  margin-top: 8px;
+  overflow: hidden;
+  font-family: "Space Mono", monospace;
+  font-size: 60px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+.contact-modal .contact-banner span {
+  display: block;
+  width: max-content;
+  transform: translateX(-6ch);
+}
+.contact-modal .contact-banner span:nth-child(2) {
+  transform: translateX(-2ch);
+}
+.contact-modal .contact-form {
+  width: min(263px, 100% - 40px);
+  margin: 40px auto 30px;
+}
+.contact-modal .contact-form p {
+  margin: 0 0 24px;
+}
+.contact-modal .contact-form p:nth-last-child(2) {
+  margin-bottom: 18px;
+}
+.contact-modal .contact-form p:last-child {
+  position: relative;
+  margin: 0;
+}
+.contact-modal .contact-form br {
+  display: none;
+}
+.contact-modal .contact-form label {
+  display: block;
+  color: #313144;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+.contact-modal .contact-form .wpcf7-form-control-wrap {
+  display: block;
+  margin-top: 4px;
+}
+.contact-modal .contact-form input:not([type=submit]),
+.contact-modal .contact-form textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #b8bbc5;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  font-family: inherit;
+  font-size: 16px;
+}
+.contact-modal .contact-form textarea {
+  height: 210px;
+  min-height: 150px;
+  resize: vertical;
+}
+.contact-modal .contact-form .wpcf7-submit {
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: #d8d8d8;
+  color: #000;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.contact-modal .contact-form .wpcf7-submit:hover, .contact-modal .contact-form .wpcf7-submit:focus-visible {
+  background: #000;
+  color: #fff;
+}
+.contact-modal .contact-form .wpcf7-spinner {
+  position: absolute;
+  top: 13px;
+  right: 8px;
+  margin: 0;
+}
+.contact-modal .contact-form .wpcf7-not-valid-tip {
+  font-size: 12px;
+}
+.contact-modal .wpcf7 form .wpcf7-response-output {
+  margin: 0 24px 24px;
+  font-size: 12px;
+}
+
+body.is-contact-open {
+  overflow: hidden;
+}
+
+@keyframes contact-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 767px) {
+  .contact-modal {
+    width: min(286px, 100% - 40px);
+    border-width: 3px;
+  }
+  .contact-modal .contact-banner {
+    font-size: 32px;
+  }
+  .contact-modal .contact-banner span {
+    transform: translateX(-4ch);
+  }
+  .contact-modal .contact-banner span:nth-child(2) {
+    transform: translateX(-3ch);
+  }
+  .contact-modal .contact-form {
+    width: min(190px, 100% - 32px);
+    margin: 12px auto 18px;
+  }
+  .contact-modal .contact-form p {
+    margin-bottom: 15px;
+  }
+  .contact-modal .contact-form p:nth-last-child(2) {
+    margin-bottom: 18px;
+  }
+  .contact-modal .contact-form p:last-child {
+    margin: 0;
+  }
+  .contact-modal .contact-form textarea {
+    height: 150px;
+  }
+}

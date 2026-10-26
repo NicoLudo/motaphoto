@@ -23,6 +23,6 @@ add_action( 'after_setup_theme', 'motaphoto_setup' );
 // CSS et JavaScript
 function motaphoto_enqueue_assets() {
     wp_enqueue_style( 'motaphoto-style', get_stylesheet_uri() );
-    wp_enqueue_script( 'motaphoto-scripts', get_template_directory_uri() . '/js/scripts.js', array(), null, true );
+    wp_enqueue_script( 'motaphoto-scripts', get_template_directory_uri() . '/js/scripts.js', array( 'jquery' ), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'motaphoto_enqueue_assets' );

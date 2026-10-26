@@ -86,6 +86,12 @@ if (contactModal) {
         event.preventDefault();
         contactTrigger = link;
 
+        const reference = link.dataset.photoReference || '';
+
+        jQuery(contactModal)
+            .find('[name="photo-reference"]')
+            .val(reference);
+
         contactModal.showModal();
         document.body.classList.add('is-contact-open');
         contactModal.querySelector('input[name="your-name"]')?.focus();

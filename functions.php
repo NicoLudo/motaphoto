@@ -27,7 +27,7 @@ function motaphoto_enqueue_assets() {
     $theme_url  = get_template_directory_uri();
 
     // La date des fichiers renouvelle le cache après une modification.
-    foreach ( [ 'menu', 'contact' ] as $script ) {
+    foreach ( [ 'menu', 'contact', 'lightbox' ] as $script ) {
         wp_enqueue_script(
             'motaphoto-' . $script,
             $theme_url . '/js/' . $script . '.js',

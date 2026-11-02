@@ -1,24 +1,66 @@
 <?php
-// Vignette réutilisée dans les galeries.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+// Prépare les informations de la carte et de la lightbox
+$title     = get_the_title();
+$reference = get_field( 'reference' ) ?: '';
+$image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+$alt       = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ?: $title;
+
+$categories = get_the_terms( get_the_ID(), 'categorie' );
+$category   = $categories && ! is_wp_error( $categories )
+    ? implode( ', ', wp_list_pluck( $categories, 'name' ) )
+    : '';
 ?>
 
 <article class="photo-card">
-    <a
-        class="photo-card-link"
-        href="<?php echo esc_url( get_permalink() ); ?>"
-        aria-label="Voir la photo : <?php echo esc_attr( get_the_title() ); ?>"
-    >
-        <?php
-        the_post_thumbnail(
-            'large',
-            [
-                'class' => 'photo-card-image',
-                'sizes' => '(max-width: 767px) 318px, (max-width: 1188px) calc(50vw - 30px), 564px',
-            ]
-        );
-        ?>
-    </a>
+    <?php
+    the_post_thumbnail(
+        'large',
+        [
+            'class' => 'photo-card-image',
+            'sizes' => '(max-width: 767px) 318px, (max-width: 1188px) calc(50vw - 30px), 564px',
+        ]
+    );
+    ?>
+
+    <div class="photo-card-overlay">
+        <a
+            class="photo-card-link"
+            href="<?php echo esc_url( get_permalink() ); ?>"
+            aria-label="Voir la photo : <?php echo esc_attr( $title ); ?>"
+        >
+            <svg viewBox="0 0 48 32" aria-hidden="true" focusable="false">
+                <path d="M2 16s8-13 22-13 22 13 22 13-8 13-22 13S2 16 2 16Z"/>
+                <circle cx="24" cy="16" r="7"/>
+            </svg>
+        </a>
+
+        <?php if ( $image_url ) : ?>
+            <button
+                class="photo-fullscreen"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="lightbox"
+                aria-label="Agrandir la photo : <?php echo esc_attr( $title ); ?>"
+                data-image="<?php echo esc_url( $image_url ); ?>"
+                data-title="<?php echo esc_attr( $title ); ?>"
+                data-alt="<?php echo esc_attr( $alt ); ?>"
+                data-reference="<?php echo esc_attr( $reference ); ?>"
+                data-category="<?php echo esc_attr( $category ); ?>"
+            >
+                <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+                    <circle cx="17" cy="17" r="17" fill="#000"/>
+                    <path d="M14 10h-4v4m10-4h4v4M10 20v4h4m10-4v4h-4" fill="none" stroke="#fff"/>
+                </svg>
+            </button>
+        <?php endif; ?>
+
+        <div class="photo-card-meta">
+            <span><?php echo esc_html( $reference ); ?></span>
+            <span><?php echo esc_html( $category ); ?></span>
+        </div>
+    </div>
 </article>

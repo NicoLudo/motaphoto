@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php
 // Contact commun à toutes les pages.
 get_template_part( 'template-parts/contact-modal' );
+get_template_part( 'template-parts/lightbox' );
 wp_footer();
 ?>
 

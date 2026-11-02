@@ -1,0 +1,53 @@
+.home-main {
+    width: 100%;
+    padding-block: 0;
+}
+
+.hero {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-title {
+    position: relative;
+    margin: 0;
+    padding-inline: 20px;
+    color: transparent;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(24px, 6.7vw, 96px);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-text-stroke: 2px #fff;
+}
+
+.home-gallery {
+    width: min(100% - 40px, 1148px);
+    margin-inline: auto;
+    padding-block: 80px 40px;
+}
+
+@media (max-width: 767px) {
+    .hero-title {
+        -webkit-text-stroke: 1px #fff;
+    }
+
+    .home-gallery {
+        width: min(100% - 40px, 318px);
+        padding-block: 40px;
+    }
+}

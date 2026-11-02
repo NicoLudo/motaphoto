@@ -61,10 +61,10 @@ Text Domain: motaphoto
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
   color: #000;
   background: #fff;
   font-family: "Poppins", sans-serif;
@@ -78,9 +78,9 @@ a {
 
 .site-main {
   flex: 1;
-  padding-block: 60px;
   width: min(100% - 40px, 1148px);
   margin-inline: auto;
+  padding-block: 60px;
 }
 
 h1 {
@@ -97,13 +97,13 @@ h1 {
 
 .header-inner {
   position: relative;
-  width: min(100% - 80px, 1148px);
-  min-height: var(--header-height);
-  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  width: min(100% - 80px, 1148px);
+  min-height: var(--header-height);
+  margin-inline: auto;
 }
 
 .site-logo {
@@ -165,7 +165,6 @@ h1 {
   background: #fff;
   transform: translateY(-200%);
 }
-
 .skip-link:focus {
   transform: translateY(0);
 }
@@ -471,12 +470,6 @@ body.is-contact-open {
   .contact-modal .contact-form p {
     margin-bottom: 15px;
   }
-  .contact-modal .contact-form p:nth-last-child(2) {
-    margin-bottom: 18px;
-  }
-  .contact-modal .contact-form p:last-child {
-    margin: 0;
-  }
   .contact-modal .contact-form textarea {
     height: 150px;
   }
@@ -485,11 +478,15 @@ body.is-contact-open {
   padding-top: 38px;
 }
 
-.photo-detail {
+.photo-detail,
+.photo-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: end;
   gap: 20px;
+}
+
+.photo-detail {
+  align-items: end;
 }
 
 .photo-info {
@@ -529,39 +526,7 @@ body.is-contact-open {
   object-position: right bottom;
 }
 
-@media (max-width: 767px) {
-  .photo-main {
-    padding-top: 20px;
-  }
-  .photo-detail {
-    grid-template-columns: 1fr;
-    width: min(100%, 265px);
-    margin-inline: auto;
-    gap: 24px;
-  }
-  .photo-image {
-    order: -1;
-  }
-  .photo-image img {
-    max-height: none;
-  }
-  .photo-info {
-    padding-bottom: 36px;
-    border-bottom: 0;
-  }
-  .photo-info p {
-    margin-bottom: 16px;
-  }
-  .photo-title {
-    min-width: 0;
-    max-width: 100%;
-    font-size: 46px;
-  }
-}
 .photo-actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
   border-bottom: 1px solid #000;
 }
 
@@ -598,24 +563,6 @@ body.is-contact-open {
   color: #fff;
 }
 
-@media (max-width: 767px) {
-  .photo-actions {
-    grid-template-columns: 1fr;
-    margin-inline: -20px;
-    border-top: 1px solid #000;
-  }
-  .photo-contact {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    width: min(265px, 100% - 40px);
-    margin-inline: auto;
-    padding: 24px 0;
-  }
-  .photo-contact-button {
-    width: 100%;
-  }
-}
 .photo-navigation {
   position: relative;
   display: flex;
@@ -670,7 +617,105 @@ body.is-contact-open {
 }
 
 @media (max-width: 767px) {
+  .photo-main {
+    padding-top: 20px;
+  }
+  .photo-detail,
+  .photo-actions {
+    grid-template-columns: 1fr;
+  }
+  .photo-detail {
+    width: min(100%, 265px);
+    margin-inline: auto;
+    gap: 24px;
+  }
+  .photo-image {
+    order: -1;
+  }
+  .photo-image img {
+    max-height: none;
+  }
+  .photo-info {
+    padding-bottom: 36px;
+    border-bottom: 0;
+  }
+  .photo-info p {
+    margin-bottom: 16px;
+  }
+  .photo-title {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 46px;
+  }
+  .photo-actions {
+    margin-inline: -20px;
+    border-top: 1px solid #000;
+  }
+  .photo-contact {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: min(265px, 100% - 40px);
+    margin-inline: auto;
+    padding: 24px 0;
+  }
+  .photo-contact-button {
+    width: 100%;
+  }
   .photo-navigation {
     display: none;
+  }
+}
+.related-photos {
+  padding: 80px 0 40px;
+}
+.related-photos h2 {
+  margin: 0 0 50px;
+  font-family: "Space Mono", monospace;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.photo-card {
+  aspect-ratio: 564/495;
+  overflow: hidden;
+}
+
+.photo-card-link,
+.photo-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-card-link:focus-visible {
+  outline-offset: -4px;
+}
+
+.photo-card-image {
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .related-photos {
+    width: min(100%, 318px);
+    margin-inline: auto;
+    padding: 24px 0 0;
+  }
+  .related-photos h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .photo-grid {
+    grid-template-columns: 1fr;
   }
 }

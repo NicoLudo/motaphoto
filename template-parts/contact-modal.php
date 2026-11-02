@@ -1,4 +1,5 @@
 <?php
+// Fenêtre de contact et formulaire Contact Form 7.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }

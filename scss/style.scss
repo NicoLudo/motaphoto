@@ -9,6 +9,7 @@ Requires PHP: 8.0
 Text Domain: motaphoto
 */
 
+// Ordre des modules conservé pour la cascade du thème.
 @use 'fonts';
 @use 'base';
 @use 'header';
@@ -16,3 +17,4 @@ Text Domain: motaphoto
 @use 'mobile';
 @use 'contact';
 @use 'single-photo';
+@use 'photo-gallery';

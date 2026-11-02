@@ -1,12 +1,17 @@
+// Métadonnées et image de la fiche photo.
 .photo-main {
     padding-top: 38px;
 }
 
-.photo-detail {
+.photo-detail,
+.photo-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: end;
     gap: 20px;
+}
+
+.photo-detail {
+    align-items: end;
 }
 
 .photo-info {
@@ -48,46 +53,8 @@
     object-position: right bottom;
 }
 
-@media (max-width: 767px) {
-    .photo-main {
-        padding-top: 20px;
-    }
-
-    .photo-detail {
-        grid-template-columns: 1fr;
-        width: min(100%, 265px);
-        margin-inline: auto;
-        gap: 24px;
-    }
-
-    .photo-image {
-        order: -1;
-
-        img {
-            max-height: none;
-        }
-    }
-
-    .photo-info {
-        padding-bottom: 36px;
-        border-bottom: 0;
-
-        p {
-            margin-bottom: 16px;
-        }
-    }
-
-    .photo-title {
-        min-width: 0;
-        max-width: 100%;
-        font-size: 46px;
-    }
-}
-
+// Contact et navigation entre les photos voisines.
 .photo-actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
     border-bottom: 1px solid #000;
 }
 
@@ -124,27 +91,6 @@
     &:focus-visible {
         background: #000;
         color: #fff;
-    }
-}
-
-@media (max-width: 767px) {
-    .photo-actions {
-        grid-template-columns: 1fr;
-        margin-inline: -20px;
-        border-top: 1px solid #000;
-    }
-
-    .photo-contact {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-        width: min(265px, calc(100% - 40px));
-        margin-inline: auto;
-        padding: 24px 0;
-    }
-
-    .photo-contact-button {
-        width: 100%;
     }
 }
 
@@ -208,6 +154,62 @@
 }
 
 @media (max-width: 767px) {
+    .photo-main {
+        padding-top: 20px;
+    }
+
+    .photo-detail,
+    .photo-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-detail {
+        width: min(100%, 265px);
+        margin-inline: auto;
+        gap: 24px;
+    }
+
+    .photo-image {
+        order: -1;
+
+        img {
+            max-height: none;
+        }
+    }
+
+    .photo-info {
+        padding-bottom: 36px;
+        border-bottom: 0;
+
+        p {
+            margin-bottom: 16px;
+        }
+    }
+
+    .photo-title {
+        min-width: 0;
+        max-width: 100%;
+        font-size: 46px;
+    }
+
+    .photo-actions {
+        margin-inline: -20px;
+        border-top: 1px solid #000;
+    }
+
+    .photo-contact {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        width: min(265px, calc(100% - 40px));
+        margin-inline: auto;
+        padding: 24px 0;
+    }
+
+    .photo-contact-button {
+        width: 100%;
+    }
+
     .photo-navigation {
         display: none;
     }

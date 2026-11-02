@@ -1,3 +1,4 @@
+// En-tête et navigation principale.
 .site-header {
     position: relative;
     z-index: 30;
@@ -8,13 +9,13 @@
 
 .header-inner {
     position: relative;
-    width: min(100% - 80px, 1148px);
-    min-height: var(--header-height);
-    margin-inline: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+    width: min(100% - 80px, 1148px);
+    min-height: var(--header-height);
+    margin-inline: auto;
 }
 
 .site-logo {
@@ -66,6 +67,7 @@
     display: none;
 }
 
+// Repères de navigation au clavier.
 :focus-visible {
     outline: 2px solid var(--color-red);
     outline-offset: 5px;
@@ -79,8 +81,8 @@
     padding: 10px 16px;
     background: #fff;
     transform: translateY(-200%);
-}
 
-.skip-link:focus {
-    transform: translateY(0);
+    &:focus {
+        transform: translateY(0);
+    }
 }

@@ -1,3 +1,4 @@
+// Fenêtre de contact et fond assombri.
 .contact-modal {
     width: min(600px, calc(100% - 40px));
     max-height: calc(100dvh - 40px);
@@ -7,7 +8,7 @@
     overflow-y: auto;
 
     &::backdrop {
-        background: rgba(0, 0, 0, 0.6);
+        background: rgb(0 0 0 / 60%);
     }
 
     &[open],
@@ -52,21 +53,22 @@
         }
     }
 
+    // Champs et retours du formulaire Contact Form 7.
     .contact-form {
         width: min(263px, calc(100% - 40px));
         margin: 40px auto 30px;
 
         p {
             margin: 0 0 24px;
-        }
 
-        p:nth-last-child(2) {
-            margin-bottom: 18px;
-        }
+            &:nth-last-child(2) {
+                margin-bottom: 18px;
+            }
 
-        p:last-child {
-            position: relative;
-            margin: 0;
+            &:last-child {
+                position: relative;
+                margin: 0;
+            }
         }
 
         br {
@@ -183,14 +185,6 @@ body.is-contact-open {
 
             p {
                 margin-bottom: 15px;
-            }
-
-            p:nth-last-child(2) {
-                margin-bottom: 18px;
-            }
-
-            p:last-child {
-                margin: 0;
             }
 
             textarea {

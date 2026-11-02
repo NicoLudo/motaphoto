@@ -6,16 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <footer class="site-footer">
     <div class="footer-inner">
+        <?php // Navigation secondaire. ?>
         <?php if ( has_nav_menu( 'footer-menu' ) ) : ?>
             <nav aria-label="Menu du pied de page">
                 <?php
                 wp_nav_menu(
-                    array(
+                    [
                         'theme_location' => 'footer-menu',
                         'container'      => false,
                         'menu_class'     => 'footer-menu',
                         'fallback_cb'    => false,
-                    )
+                    ]
                 );
                 ?>
             </nav>
@@ -25,9 +26,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 </footer>
 
-<?php get_template_part( 'template-parts/contact-modal' ); ?>
-
-<?php wp_footer(); ?>
+<?php
+// Contact commun à toutes les pages.
+get_template_part( 'template-parts/contact-modal' );
+wp_footer();
+?>
 
 </body>
 </html>

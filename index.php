@@ -1,5 +1,5 @@
 <?php
-// Page de test
+// Modèle de secours.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -12,4 +12,4 @@ get_header();
     <p>Test texte description.</p>
 </main>
 
-<?php get_footer(); ?>
+<?php get_footer();

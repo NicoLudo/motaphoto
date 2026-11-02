@@ -1,47 +1,17 @@
-@font-face {
-    font-family: 'Space Mono';
-    src: url('assets/fonts/spacemono/SpaceMono-Regular.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
+// Les polices locales laissent le texte visible pendant leur chargement.
+@mixin font-face($family, $file, $weight: 400, $style: normal) {
+    @font-face {
+        font-family: $family;
+        src: url('assets/fonts/#{$file}.woff2') format('woff2');
+        font-style: $style;
+        font-weight: $weight;
+        font-display: swap;
+    }
 }
 
-@font-face {
-    font-family: 'Space Mono';
-    src: url('assets/fonts/spacemono/SpaceMono-Italic.woff2') format('woff2');
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Space Mono';
-    src: url('assets/fonts/spacemono/SpaceMono-BoldItalic.woff2') format('woff2');
-    font-style: italic;
-    font-weight: 700;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/poppins/Poppins-Light.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/poppins/Poppins-Regular.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/poppins/Poppins-Medium.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-}
+@include font-face('Space Mono', 'spacemono/SpaceMono-Regular');
+@include font-face('Space Mono', 'spacemono/SpaceMono-Italic', 400, italic);
+@include font-face('Space Mono', 'spacemono/SpaceMono-BoldItalic', 700, italic);
+@include font-face('Poppins', 'poppins/Poppins-Light', 300);
+@include font-face('Poppins', 'poppins/Poppins-Regular');
+@include font-face('Poppins', 'poppins/Poppins-Medium', 500);

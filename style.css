@@ -762,13 +762,48 @@ body.is-contact-open {
   padding-block: 80px 40px;
 }
 
+.gallery-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 34px;
+  margin-bottom: 40px;
+}
+.gallery-filters select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #b8bbc2;
+  border-radius: 8px;
+  background: #fff;
+  color: #313144;
+  font: 400 12px "Poppins", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.gallery-filters select[name=order] {
+  grid-column: 4;
+}
+
 @media (max-width: 767px) {
   .hero-title {
     -webkit-text-stroke: 1px #fff;
   }
   .home-gallery {
     width: min(100% - 40px, 318px);
-    padding-block: 40px;
+    padding-block: 28px 40px;
+  }
+  .gallery-filters {
+    width: min(100%, 272px);
+    margin: 0 auto 24px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .gallery-filters select[name=format] {
+    order: -1;
+  }
+  .gallery-filters select[name=order] {
+    grid-column: auto;
   }
 }
 .load-more {

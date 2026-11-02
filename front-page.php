@@ -27,23 +27,21 @@ get_header();
     </section>
 
     <section class="home-gallery" aria-label="Galerie de photos">
+        <?php get_template_part( 'template-parts/gallery-filters' ); ?>
+
         <?php
         // Charge le premier lot de photos
         $photos = motaphoto_get_photos();
         ?>
 
-        <?php if ( $photos->have_posts() ) : ?>
-            <div id="photo-grid" class="photo-grid">
-                <?php
-                while ( $photos->have_posts() ) :
-                    $photos->the_post();
-                    get_template_part( 'template-parts/photo-card' );
-                endwhile;
-                ?>
-            </div>
-        <?php else : ?>
-            <p>Aucune photo à afficher pour le moment</p>
-        <?php endif; ?>
+        <div id="photo-grid" class="photo-grid">
+            <?php
+            while ( $photos->have_posts() ) :
+                $photos->the_post();
+                get_template_part( 'template-parts/photo-card' );
+            endwhile;
+            ?>
+        </div>
 
         <?php
         // Rétablit les données de la page Accueil
@@ -63,7 +61,9 @@ get_header();
             Charger plus
         </button>
 
-        <p id="gallery-status" class="gallery-status" role="status"></p>
+        <p id="gallery-status" class="gallery-status" role="status">
+            <?php echo $photos->post_count ? '' : 'Aucune photo à afficher pour le moment'; ?>
+        </p>
     </section>
 </main>
 

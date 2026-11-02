@@ -28,19 +28,8 @@ get_header();
 
     <section class="home-gallery" aria-label="Galerie de photos">
         <?php
-        // Récupère les huit photos les plus récentes
-        $photos = new WP_Query(
-            [
-                'post_type'      => 'photo',
-                'post_status'    => 'publish',
-                'posts_per_page' => 8,
-                'no_found_rows'  => true,
-                'orderby'       => [
-                    'date' => 'DESC',
-                    'ID'   => 'DESC',
-                ],
-            ]
-        );
+        // Charge le premier lot de photos
+        $photos = motaphoto_get_photos();
         ?>
 
         <?php if ( $photos->have_posts() ) : ?>
@@ -60,6 +49,21 @@ get_header();
         // Rétablit les données de la page Accueil
         wp_reset_postdata();
         ?>
+
+        <button
+            id="load-more"
+            class="load-more"
+            type="button"
+            aria-controls="photo-grid"
+            data-page="1"
+            data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
+            data-nonce="<?php echo esc_attr( wp_create_nonce( 'motaphoto_photos' ) ); ?>"
+            <?php echo $photos->max_num_pages <= 1 ? 'hidden' : ''; ?>
+        >
+            Charger plus
+        </button>
+
+        <p id="gallery-status" class="gallery-status" role="status"></p>
     </section>
 </main>
 

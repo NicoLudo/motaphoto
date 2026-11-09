@@ -936,28 +936,34 @@ body.is-contact-open {
   background: rgba(0, 0, 0, 0.8);
 }
 
-.lightbox-close {
+.lightbox-close,
+.lightbox-nav {
   position: fixed;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 250ms ease;
+}
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  opacity: 0.7;
+}
+.lightbox-close:focus-visible,
+.lightbox-nav:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.lightbox-close {
+  z-index: 2;
   top: 12px;
   right: 12px;
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 0;
-  background: transparent;
-  color: #fff;
   font-size: 36px;
   line-height: 1;
-  cursor: pointer;
-  transition: opacity 250ms ease;
-  z-index: 2;
-}
-.lightbox-close:hover {
-  opacity: 0.7;
-}
-.lightbox-close:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
 }
 
 .lightbox-content {
@@ -1015,7 +1021,6 @@ body.is-contact-open {
   }
 }
 .lightbox-nav {
-  position: fixed;
   z-index: 1;
   top: 50%;
   display: flex;
@@ -1025,20 +1030,8 @@ body.is-contact-open {
   width: 140px;
   min-height: 44px;
   padding: 8px;
-  border: 0;
-  background: transparent;
-  color: #fff;
   font: 400 12px "Space Mono", monospace;
-  cursor: pointer;
   transform: translateY(-50%);
-  transition: opacity 250ms ease;
-}
-.lightbox-nav:hover {
-  opacity: 0.7;
-}
-.lightbox-nav:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
 }
 .lightbox-nav[hidden] {
   display: none;

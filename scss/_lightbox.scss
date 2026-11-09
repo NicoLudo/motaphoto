@@ -16,6 +16,7 @@
     background: transparent;
     color: #fff;
 
+    // Le navigateur masque le dialogue tant qu'il est fermé
     &[open] {
         display: flex;
         animation: lightbox-appear 200ms ease-out;
@@ -26,21 +27,14 @@
     }
 }
 
-.lightbox-close {
+.lightbox-close,
+.lightbox-nav {
     position: fixed;
-    top: 12px;
-    right: 12px;
-    width: 44px;
-    height: 44px;
-    padding: 0;
     border: 0;
     background: transparent;
     color: #fff;
-    font-size: 36px;
-    line-height: 1;
     cursor: pointer;
     transition: opacity 250ms ease;
-    z-index: 2;
 
     &:hover {
         opacity: 0.7;
@@ -50,6 +44,17 @@
         outline: 2px solid #fff;
         outline-offset: 2px;
     }
+}
+
+.lightbox-close {
+    z-index: 2;
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    font-size: 36px;
+    line-height: 1;
 }
 
 .lightbox-content {
@@ -66,6 +71,7 @@
     img {
         display: block;
         max-width: 100%;
+        // Réserve de la place pour les légendes et les commandes
         max-height: max(120px, calc(100dvh - 220px));
         width: auto;
         height: auto;
@@ -110,7 +116,6 @@
 }
 
 .lightbox-nav {
-    position: fixed;
     z-index: 1;
     top: 50%;
     display: flex;
@@ -120,22 +125,8 @@
     width: 140px;
     min-height: 44px;
     padding: 8px;
-    border: 0;
-    background: transparent;
-    color: #fff;
     font: 400 12px 'Space Mono', monospace;
-    cursor: pointer;
     transform: translateY(-50%);
-    transition: opacity 250ms ease;
-
-    &:hover {
-        opacity: 0.7;
-    }
-
-    &:focus-visible {
-        outline: 2px solid #fff;
-        outline-offset: 2px;
-    }
 
     &[hidden] {
         display: none;
@@ -160,6 +151,7 @@
         padding: 64px 16px 80px;
     }
 
+    // Sur mobile, les flèches passent sous la photo
     .lightbox-nav {
         top: auto;
         bottom: 12px;

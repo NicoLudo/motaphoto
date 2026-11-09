@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <span aria-hidden="true">×</span>
     </button>
 
-    <!-- Boutons de navigation -->
+    <?php // Le script affiche les commandes quand il y a plusieurs photos ?>
     <button
         class="lightbox-nav lightbox-prev"
         type="button"
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <span aria-hidden="true">→</span>
     </button>
 
-    <!-- Contenu de la lightbox -->
+    <?php // L’image est ajoutée ici au moment de l’ouverture ?>
     <figure class="lightbox-content">
         <div class="lightbox-media" aria-busy="false"></div>
 

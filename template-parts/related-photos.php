@@ -1,5 +1,5 @@
 <?php
-// Photos associées à la fiche consultée.
+// Sélectionne des photos proches de la fiche consultée
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -10,7 +10,7 @@ if ( ! $categories || is_wp_error( $categories ) ) {
     return;
 }
 
-// Deux photos partageant une catégorie, des plus récentes aux plus anciennes.
+// Propose deux photos de la même catégorie en excluant celle déjà ouverte
 $related_photos = new WP_Query(
     [
         'post_type'      => 'photo',
@@ -51,5 +51,5 @@ if ( ! $related_photos->have_posts() ) {
 </section>
 
 <?php
-// Restaure la photo de la boucle principale.
+// Rétablit la fiche en cours après la boucle des suggestions
 wp_reset_postdata();

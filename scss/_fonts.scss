@@ -1,4 +1,4 @@
-// Les polices locales laissent le texte visible pendant leur chargement.
+// Le texte reste visible pendant que les polices du thème se chargent
 @mixin font-face($family, $file, $weight: 400, $style: normal) {
     @font-face {
         font-family: $family;

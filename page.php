@@ -1,5 +1,5 @@
 <?php
-// Contenu des pages classiques.
+// Affiche le contenu des pages saisies dans WordPress
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }

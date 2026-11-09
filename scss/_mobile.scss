@@ -49,6 +49,7 @@
         background: #000;
         transition: transform 250ms ease, opacity 250ms ease;
 
+        // Les trois barres forment une croix à l'ouverture du menu
         .is-menu-open &:nth-child(1) {
             transform: translateY(6px) rotate(45deg);
         }

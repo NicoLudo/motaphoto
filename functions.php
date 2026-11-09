@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// Réglages du thème
+// Déclare le logo, les images et les menus dans WordPress
 function motaphoto_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
@@ -25,24 +25,22 @@ function motaphoto_enqueue_assets() {
 
     $theme_path = get_template_directory();
     $theme_url  = get_template_directory_uri();
+    $scripts    = [ 'menu', 'contact', 'lightbox' ];
 
-    // La date des fichiers renouvelle le cache après une modification.
-    foreach ( [ 'menu', 'contact', 'lightbox' ] as $script ) {
-        wp_enqueue_script(
-            'motaphoto-' . $script,
-            $theme_url . '/js/' . $script . '.js',
-            [],
-            filemtime( $theme_path . '/js/' . $script . '.js' ),
-            true
-        );
+    // Le script de la galerie sert uniquement sur l’accueil
+    if ( is_front_page() ) {
+        $scripts[] = 'gallery';
     }
 
-    if ( is_front_page() ) {
+    // La date de modification évite de servir une ancienne version du script
+    foreach ( $scripts as $script ) {
+        $file = '/js/' . $script . '.js';
+
         wp_enqueue_script(
-            'motaphoto-gallery',
-            $theme_url . '/js/gallery.js',
+            'motaphoto-' . $script,
+            $theme_url . $file,
             [],
-            filemtime( $theme_path . '/js/gallery.js' ),
+            filemtime( $theme_path . $file ),
             true
         );
     }
@@ -53,6 +51,7 @@ add_action( 'wp_enqueue_scripts', 'motaphoto_enqueue_assets' );
 function motaphoto_get_photos( $page = 1, $filters = [] ) {
     $order = ( $filters['order'] ?? '' ) === 'ASC' ? 'ASC' : 'DESC';
 
+    // L’identifiant départage les photos qui ont la même date
     $args = [
         'post_type'      => 'photo',
         'post_status'    => 'publish',
@@ -62,6 +61,7 @@ function motaphoto_get_photos( $page = 1, $filters = [] ) {
         'tax_query'     => [ 'relation' => 'AND' ],
     ];
 
+    // Ajoute seulement les filtres choisis dans les listes
     foreach ( [ 'categorie', 'format' ] as $taxonomy ) {
         $value   = $filters[ $taxonomy ] ?? 0;
         $term_id = is_scalar( $value ) ? absint( $value ) : 0;
@@ -80,11 +80,13 @@ function motaphoto_get_photos( $page = 1, $filters = [] ) {
 
 // Renvoie le lot demandé sans recharger la page
 function motaphoto_load_photos() {
+    // Vérifie le jeton fourni par la page avant de lancer la requête
     check_ajax_referer( 'motaphoto_photos', 'nonce' );
 
     $page   = max( 1, absint( $_POST['page'] ?? 1 ) );
     $photos = motaphoto_get_photos( $page, wp_unslash( $_POST ) );
 
+    // Récupère le HTML des cartes pour le renvoyer à JavaScript
     ob_start();
 
     while ( $photos->have_posts() ) {
@@ -103,5 +105,6 @@ function motaphoto_load_photos() {
     );
 }
 
+// Le chargement fonctionne avec ou sans compte WordPress
 add_action( 'wp_ajax_motaphoto_load_photos', 'motaphoto_load_photos' );
 add_action( 'wp_ajax_nopriv_motaphoto_load_photos', 'motaphoto_load_photos' );

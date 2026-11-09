@@ -13,6 +13,7 @@ $taxonomies = [ 'categorie' => 'Catégories', 'format' => 'Formats' ];
         $terms = is_wp_error( $terms ) ? [] : $terms;
     ?>
         <select name="<?php echo esc_attr( $taxonomy ); ?>" aria-label="<?php echo esc_attr( $label ); ?>">
+            <?php // La première option affiche toutes les photos pour ce filtre ?>
             <option value=""><?php echo esc_html( $label ); ?></option>
 
             <?php foreach ( $terms as $term ) : ?>

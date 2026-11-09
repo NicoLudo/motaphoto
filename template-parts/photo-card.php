@@ -3,16 +3,19 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// Prépare les informations de la carte et de la lightbox
+// Les vignettes reprennent les informations de la fiche photo
+$photo_id  = get_the_ID();
 $title     = get_the_title();
 $reference = get_field( 'reference' ) ?: '';
-$image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+$image_url = get_the_post_thumbnail_url( $photo_id, 'full' );
 $alt       = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ?: $title;
 
-$categories = get_the_terms( get_the_ID(), 'categorie' );
-$category   = $categories && ! is_wp_error( $categories )
-    ? implode( ', ', wp_list_pluck( $categories, 'name' ) )
-    : '';
+$categories = get_the_terms( $photo_id, 'categorie' );
+$category   = '';
+
+if ( $categories && ! is_wp_error( $categories ) ) {
+    $category = implode( ', ', wp_list_pluck( $categories, 'name' ) );
+}
 ?>
 
 <article class="photo-card">
@@ -38,6 +41,7 @@ $category   = $categories && ! is_wp_error( $categories )
             </svg>
         </a>
 
+        <?php // Le bouton garde l’adresse de la grande photo pour l’ouverture de la lightbox ?>
         <?php if ( $image_url ) : ?>
             <button
                 class="photo-fullscreen"

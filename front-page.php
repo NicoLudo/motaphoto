@@ -9,7 +9,7 @@ get_header();
 <main id="main-content" class="site-main home-main">
     <section class="hero" aria-labelledby="hero-title">
         <?php
-        // Utilise l'image mise en avant de la page Accueil
+        // La photo du bandeau vient de l’image mise en avant de la page Accueil
         echo get_the_post_thumbnail(
             get_queried_object_id(),
             'full',
@@ -30,12 +30,13 @@ get_header();
         <?php get_template_part( 'template-parts/gallery-filters' ); ?>
 
         <?php
-        // Charge le premier lot de photos
+        // Le premier lot est déjà présent quand la page s’affiche
         $photos = motaphoto_get_photos();
         ?>
 
         <div id="photo-grid" class="photo-grid">
             <?php
+            // La même carte sert à l’accueil, aux filtres et aux photos apparentées
             while ( $photos->have_posts() ) :
                 $photos->the_post();
                 get_template_part( 'template-parts/photo-card' );
@@ -44,10 +45,11 @@ get_header();
         </div>
 
         <?php
-        // Rétablit les données de la page Accueil
+        // Rétablit la page Accueil après avoir parcouru les photos
         wp_reset_postdata();
         ?>
 
+        <?php // Le bouton garde l’adresse Ajax, le jeton et le numéro de page ?>
         <button
             id="load-more"
             class="load-more"

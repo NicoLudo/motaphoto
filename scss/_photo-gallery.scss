@@ -41,6 +41,7 @@
     transition: opacity 250ms ease;
 }
 
+// Révèle les commandes au survol et quand on les atteint au clavier
 .photo-card:hover .photo-card-overlay,
 .photo-card:focus-within .photo-card-overlay {
     opacity: 1;
@@ -109,6 +110,7 @@
     }
 }
 
+// Sur écran tactile, les commandes restent visibles
 @media (hover: none), (pointer: coarse) {
     .photo-card-overlay {
         opacity: 1;

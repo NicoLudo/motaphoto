@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileScreen = window.matchMedia('(max-width: 767px)');
     let contactTrigger = null;
 
-    // Un seul écouteur ouvre le formulaire depuis les liens Contact.
+    // Tous les liens Contact ouvrent le même formulaire
     document.addEventListener('click', (event) => {
         const link = event.target.closest?.('a[href="#contact"]');
         if (!link) return;
@@ -13,11 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         contactTrigger = link;
 
-        // Une ouverture sans référence efface celle de la photo précédente.
-        contactModal.querySelectorAll('[name="photo-reference"]').forEach((field) => {
-            field.value = link.dataset.photoReference || '';
-        });
+        // Le lien transmet sa référence ou remet le champ à vide
+        const photoReference = link.dataset.photoReference || '';
+        for (const field of contactModal.querySelectorAll('[name="photo-reference"]')) {
+            field.value = photoReference;
+        }
 
+        // Le dialogue natif gère Échap et le clavier peut commencer sur le nom
         contactModal.showModal();
         document.body.classList.add('is-contact-open');
         contactModal.querySelector('input[name="your-name"]')?.focus();
@@ -25,20 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     contactModal.querySelector('.contact-close')?.addEventListener('click', () => contactModal.close());
 
-    // Seul un clic hors du cadre ferme la fenêtre.
+    // Vérifie les bords pour distinguer le fond d'un clic dans le cadre
     contactModal.addEventListener('click', (event) => {
         if (event.target !== contactModal) return;
         const box = contactModal.getBoundingClientRect();
 
-        if (
-            event.clientX < box.left || event.clientX > box.right ||
-            event.clientY < box.top || event.clientY > box.bottom
-        ) {
-            contactModal.close();
-        }
+        const outside = event.clientX < box.left || event.clientX > box.right ||
+            event.clientY < box.top || event.clientY > box.bottom;
+
+        if (outside) contactModal.close();
     });
 
-    // Après fermeture, le focus revient sur un élément encore accessible.
+    // Sur mobile, le lien du menu fermé n'est plus accessible au clavier
     contactModal.addEventListener('close', () => {
         document.body.classList.remove('is-contact-open');
 

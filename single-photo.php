@@ -1,5 +1,5 @@
 <?php
-// Fiche du type de contenu photo.
+// WordPress choisit ce modèle pour une fiche photo
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -12,13 +12,15 @@ get_header();
     while ( have_posts() ) :
         the_post();
 
-        // Métadonnées SCF, taxonomies et photos voisines.
+        // SCF fournit la référence et le type, WordPress fournit les termes
         $reference  = get_field( 'reference' );
         $type       = get_field( 'type' );
         $categories = get_the_terms( get_the_ID(), 'categorie' );
         $formats    = get_the_terms( get_the_ID(), 'format' );
+
+        // Les flèches suivent l’ordre chronologique des fiches photo
         $previous_photo = get_previous_post();
-        $next_photo = get_next_post();
+        $next_photo     = get_next_post();
         ?>
 
         <article <?php post_class( 'photo-detail' ); ?>>
@@ -41,7 +43,7 @@ get_header();
 
             <div class="photo-image">
                 <?php
-                // Laisse WordPress choisir une image adaptée à la largeur affichée.
+                // Le navigateur choisit une taille adaptée à la largeur affichée
                 if ( has_post_thumbnail() ) {
                     the_post_thumbnail(
                         'large',
@@ -58,7 +60,7 @@ get_header();
             <div class="photo-contact">
                 <p>Cette photo vous intéresse ?</p>
 
-                <?php // Transmet la référence au formulaire de contact. ?>
+                <?php // Le bouton transmet la référence au formulaire de contact ?>
                 <a
                     href="#contact"
                     class="photo-contact-button"
@@ -70,7 +72,7 @@ get_header();
                 </a>
             </div>
 
-            <?php // Navigation et aperçu des photos voisines. ?>
+            <?php // Chaque flèche affiche un aperçu de la photo vers laquelle elle mène ?>
             <?php if ( $previous_photo || $next_photo ) : ?>
                 <nav class="photo-navigation" aria-label="Navigation entre les photos">
                     <?php
@@ -78,14 +80,16 @@ get_header();
                         if ( ! $photo ) {
                             continue;
                         }
-                        $label = $direction === 'previous' ? 'Photo précédente' : 'Photo suivante';
+                        $is_previous = $direction === 'previous';
+                        $label       = $is_previous ? 'Photo précédente' : 'Photo suivante';
+                        $arrow       = $is_previous ? '←' : '→';
                     ?>
                         <a
                             class="photo-nav-link photo-nav-<?php echo esc_attr( $direction ); ?>"
                             href="<?php echo esc_url( get_permalink( $photo->ID ) ); ?>"
                             aria-label="<?php echo esc_attr( $label ); ?> : <?php echo esc_attr( get_the_title( $photo->ID ) ); ?>"
                         >
-                            <span class="photo-nav-arrow" aria-hidden="true"><?php echo $direction === 'previous' ? '←' : '→'; ?></span>
+                            <span class="photo-nav-arrow" aria-hidden="true"><?php echo $arrow; ?></span>
 
                             <?php
                             echo get_the_post_thumbnail(

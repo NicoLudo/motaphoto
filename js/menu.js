@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Sans JavaScript, la navigation mobile reste visible.
+    // Sans JavaScript, les liens restent visibles sur mobile
     document.documentElement.classList.add('js');
 
     const menuToggle = document.querySelector('.menu-toggle');
@@ -9,13 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!menuToggle || !navigation || !header) return;
 
     const mobileScreen = window.matchMedia('(max-width: 767px)');
+    // Les liens du menu fermé ne doivent pas recevoir le focus
     navigation.inert = mobileScreen.matches;
 
-    function positionMenu() {
-        navigation.style.setProperty('--menu-top', `${Math.max(0, header.getBoundingClientRect().bottom)}px`);
+    function isMenuOpen() {
+        return menuToggle.getAttribute('aria-expanded') === 'true';
     }
 
-    // L'état visuel et l'accès au clavier suivent l'ouverture du menu.
+    function positionMenu() {
+        const headerBottom = header.getBoundingClientRect().bottom;
+        navigation.style.setProperty('--menu-top', `${Math.max(0, headerBottom)}px`);
+    }
+
+    // Met à jour l'affichage, l'accès au clavier et le libellé du bouton
     function setMenu(open, restoreFocus = true) {
         if (open) positionMenu();
 
@@ -32,16 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     menuToggle.addEventListener('click', () => {
-        setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
+        setMenu(!isMenuOpen());
     });
 
+    // Ferme le menu sans renvoyer le focus au bouton avant de suivre le lien
     navigation.addEventListener('click', (event) => {
         if (event.target.closest?.('a')) setMenu(false, false);
     });
 
-    // Échap ferme le menu ; Tab reste entre le bouton et les liens.
+    // Échap ferme le menu et Tab reste entre le bouton et les liens
     document.addEventListener('keydown', (event) => {
-        if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+        if (!isMenuOpen()) return;
         if (event.key === 'Escape') return setMenu(false);
         if (event.key !== 'Tab') return;
 
@@ -58,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Le panneau suit l'en-tête et se referme au changement de format.
+    // Le panneau suit l'en-tête et se ferme quand on passe la limite mobile
     mobileScreen.addEventListener('change', () => setMenu(false, false));
     window.addEventListener('resize', () => {
-        if (menuToggle.getAttribute('aria-expanded') === 'true') positionMenu();
+        if (isMenuOpen()) positionMenu();
     });
 });

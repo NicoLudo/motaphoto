@@ -1,5 +1,5 @@
 <?php
-// Fenêtre de contact et formulaire Contact Form 7.
+// La fenêtre utilise le formulaire créé dans Contact Form 7
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -15,5 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         <span>CONTACTCONTACTCONTACTCONTACT</span>
     </div>
 
+    <?php // Le shortcode récupère les champs et les réglages du formulaire ?>
     <?php echo do_shortcode( '[contact-form-7 id="9a975d0" title="Contact"]' ); ?>
 </dialog>

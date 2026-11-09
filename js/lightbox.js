@@ -19,31 +19,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPhoto(button) {
         const currentLoad = ++loadId;
         const image = new Image();
+        const position = `${currentIndex + 1} sur ${photoButtons.length}`;
 
         media.replaceChildren();
         media.setAttribute('aria-busy', 'true');
-        status.textContent = `Chargement de la photo ${currentIndex + 1} sur ${photoButtons.length}…`;
+        status.textContent = `Chargement de la photo ${position}…`;
 
         title.textContent = button.dataset.title;
         reference.textContent = button.dataset.reference;
         category.textContent = button.dataset.category;
         image.alt = button.dataset.alt || button.dataset.title;
 
-        image.onload = () => {
+        // Un ancien chargement ne doit pas s'afficher après un changement de photo
+        function finishLoading(loaded) {
             if (currentLoad !== loadId || !lightbox.open) return;
 
-            media.replaceChildren(image);
+            if (loaded) media.replaceChildren(image);
             media.setAttribute('aria-busy', 'false');
-            status.textContent = `Photo ${currentIndex + 1} sur ${photoButtons.length}`;
-        };
+            status.textContent = loaded ? `Photo ${position}` : 'Impossible de charger cette photo';
+        }
 
-        image.onerror = () => {
-            if (currentLoad !== loadId || !lightbox.open) return;
-
-            media.setAttribute('aria-busy', 'false');
-            status.textContent = 'Impossible de charger cette photo';
-        };
-
+        image.onload = () => finishLoading(true);
+        image.onerror = () => finishLoading(false);
         image.src = button.dataset.image;
     }
 
@@ -51,11 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function changePhoto(direction) {
         if (!lightbox.open || photoButtons.length < 2) return;
 
-        currentIndex = (currentIndex + direction + photoButtons.length) % photoButtons.length;
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = photoButtons.length - 1;
+        if (currentIndex >= photoButtons.length) currentIndex = 0;
         showPhoto(photoButtons[currentIndex]);
     }
 
-    // Garde les photos affichées dans la galerie au moment de l’ouverture
+    // La liste garde l'ordre des photos de la galerie ouverte, y compris les cartes Ajax
     document.addEventListener('click', (event) => {
         const button = event.target.closest?.('.photo-fullscreen');
         if (!button || lightbox.open) return;
@@ -80,7 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
     previous.addEventListener('click', () => changePhoto(-1));
     next.addEventListener('click', () => changePhoto(1));
 
+    // Les flèches simples naviguent sans bloquer les raccourcis du navigateur
     lightbox.addEventListener('keydown', (event) => {
+        if (photoButtons.length < 2) return;
         if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.repeat) return;
 
         if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === lightbox) lightbox.close();
     });
 
-    // Nettoie la fenêtre et rend le focus à la page
+    // Invalide le chargement et rend le focus au bouton qui a ouvert la fenêtre
     lightbox.addEventListener('close', () => {
         loadId++;
         photoButtons = [];

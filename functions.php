@@ -8,7 +8,6 @@ function motaphoto_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo', [ 'flex-width' => true, 'flex-height' => true ] );
-    add_theme_support( 'html5', [ 'search-form', 'gallery', 'caption', 'style', 'script' ] );
 
     register_nav_menus(
         [

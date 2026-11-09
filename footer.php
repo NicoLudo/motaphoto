@@ -27,9 +27,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 </footer>
 
 <?php
-// Les deux fenêtres sont disponibles depuis les pages du site
+// Le formulaire de contact est disponible sur toutes les pages
 get_template_part( 'template-parts/contact-modal' );
-get_template_part( 'template-parts/lightbox' );
+
+// La lightbox sert sur l’accueil et dans les fiches photo
+if ( is_front_page() || is_singular( 'photo' ) ) {
+    get_template_part( 'template-parts/lightbox' );
+}
 
 // Charge les scripts prévus en bas de page
 wp_footer();

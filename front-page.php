@@ -63,9 +63,7 @@ get_header();
             Charger plus
         </button>
 
-        <p id="gallery-status" class="gallery-status" role="status">
-            <?php echo $photos->post_count ? '' : 'Aucune photo à afficher pour le moment'; ?>
-        </p>
+        <p id="gallery-status" class="gallery-status" role="status"><?php echo $photos->post_count ? '' : 'Aucune photo à afficher pour le moment'; ?></p>
     </section>
 </main>
 

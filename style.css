@@ -87,6 +87,15 @@ h1 {
   line-height: 1.2;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .site-header {
   position: relative;
   z-index: 30;
@@ -904,10 +913,12 @@ body.is-contact-open {
 }
 
 .gallery-status {
-  min-height: 1.5em;
   margin: 12px 0 0;
   font-size: 14px;
   text-align: center;
+}
+.gallery-status:empty {
+  margin: 0;
 }
 
 .is-lightbox-open {
@@ -1007,9 +1018,11 @@ body.is-contact-open {
 }
 
 .lightbox-status {
-  min-height: 1.5em;
   margin: 8px 0 0;
   text-align: center;
+}
+.lightbox-status:empty {
+  margin: 0;
 }
 
 @keyframes lightbox-appear {

@@ -126,8 +126,11 @@
 }
 
 .gallery-status {
-    min-height: 1.5em;
     margin: 12px 0 0;
     font-size: 14px;
     text-align: center;
+
+    &:empty {
+        margin: 0;
+    }
 }

@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         media.replaceChildren();
         media.setAttribute('aria-busy', 'true');
-        status.textContent = `Chargement de la photo ${position}…`;
+        status.classList.remove('visually-hidden');
+        status.textContent = 'Chargement de la photo…';
 
         title.textContent = button.dataset.title;
         reference.textContent = button.dataset.reference;
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (loaded) media.replaceChildren(image);
             media.setAttribute('aria-busy', 'false');
+            status.classList.toggle('visually-hidden', loaded);
             status.textContent = loaded ? `Photo ${position}` : 'Impossible de charger cette photo';
         }
 
@@ -102,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.addEventListener('close', () => {
         loadId++;
         photoButtons = [];
-        currentIndex = 0;
         media.replaceChildren();
         media.setAttribute('aria-busy', 'false');
         status.textContent = '';

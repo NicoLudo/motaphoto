@@ -100,9 +100,12 @@
 }
 
 .lightbox-status {
-    min-height: 1.5em;
     margin: 8px 0 0;
     text-align: center;
+
+    &:empty {
+        margin: 0;
+    }
 }
 
 @keyframes lightbox-appear {

@@ -25,7 +25,12 @@ function motaphoto_enqueue_assets() {
 
     $theme_path = get_template_directory();
     $theme_url  = get_template_directory_uri();
-    $scripts    = [ 'menu', 'contact', 'lightbox' ];
+    $scripts    = [ 'menu', 'contact' ];
+
+    // La lightbox sert sur l’accueil et dans les fiches photo
+    if ( is_front_page() || is_singular( 'photo' ) ) {
+        $scripts[] = 'lightbox';
+    }
 
     // Le script de la galerie sert uniquement sur l’accueil
     if ( is_front_page() ) {

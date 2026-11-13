@@ -21,52 +21,35 @@ document.addEventListener('DOMContentLoaded', () => {
         navigation.style.setProperty('--menu-top', `${Math.max(0, headerBottom)}px`);
     }
 
-    // Met à jour l'affichage, l'accès au clavier et le libellé du bouton
-    function setMenu(open, restoreFocus = true) {
+    // Ouvre ou ferme le panneau mobile
+    function setMenu(open) {
         if (open) positionMenu();
 
         navigation.inert = !open && mobileScreen.matches;
         document.body.classList.toggle('is-menu-open', open);
         menuToggle.setAttribute('aria-expanded', String(open));
-        menuToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-
-        if (open) {
-            navigation.querySelector('a')?.focus();
-        } else if (restoreFocus && mobileScreen.matches) {
-            menuToggle.focus();
-        }
     }
 
     menuToggle.addEventListener('click', () => {
         setMenu(!isMenuOpen());
     });
 
-    // Ferme le menu sans renvoyer le focus au bouton avant de suivre le lien
     navigation.addEventListener('click', (event) => {
-        if (event.target.closest?.('a')) setMenu(false, false);
+        if (event.target.closest('a') && isMenuOpen()) setMenu(false);
     });
 
-    // Échap ferme le menu et Tab reste entre le bouton et les liens
-    document.addEventListener('keydown', (event) => {
-        if (!isMenuOpen()) return;
-        if (event.key === 'Escape') return setMenu(false);
-        if (event.key !== 'Tab') return;
+    header.addEventListener('focusout', (event) => {
+        if (isMenuOpen() && !header.contains(event.relatedTarget)) setMenu(false);
+    });
 
-        const links = header.querySelectorAll('.menu-toggle, .primary-navigation a[href]');
-        const first = links[0];
-        const last = links[links.length - 1];
-
-        if (event.shiftKey && document.activeElement === first) {
-            event.preventDefault();
-            last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-            event.preventDefault();
-            first.focus();
-        }
+    header.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || !isMenuOpen()) return;
+        menuToggle.focus();
+        setMenu(false);
     });
 
     // Le panneau suit l'en-tête et se ferme quand on passe la limite mobile
-    mobileScreen.addEventListener('change', () => setMenu(false, false));
+    mobileScreen.addEventListener('change', () => setMenu(false));
     window.addEventListener('resize', () => {
         if (isMenuOpen()) positionMenu();
     });

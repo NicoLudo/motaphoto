@@ -72,17 +72,3 @@
     outline: 2px solid var(--color-red);
     outline-offset: 5px;
 }
-
-.skip-link {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 100000;
-    padding: 10px 16px;
-    background: #fff;
-    transform: translateY(-200%);
-
-    &:focus {
-        transform: translateY(0);
-    }
-}

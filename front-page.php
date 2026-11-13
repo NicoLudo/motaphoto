@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="main-content" class="site-main home-main">
-    <section class="hero" aria-labelledby="hero-title">
+<main class="site-main home-main">
+    <section class="hero">
         <?php
         // La photo du bandeau vient de l’image mise en avant de la page Accueil
         echo get_the_post_thumbnail(
@@ -23,10 +23,10 @@ get_header();
         );
         ?>
 
-        <h1 id="hero-title" class="hero-title">Photographe event</h1>
+        <h1 class="hero-title">Photographe event</h1>
     </section>
 
-    <section class="home-gallery" aria-label="Galerie de photos">
+    <section class="home-gallery">
         <?php get_template_part( 'template-parts/gallery-filters' ); ?>
 
         <?php
@@ -54,7 +54,6 @@ get_header();
             id="load-more"
             class="load-more"
             type="button"
-            aria-controls="photo-grid"
             data-page="1"
             data-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
             data-nonce="<?php echo esc_attr( wp_create_nonce( 'motaphoto_photos' ) ); ?>"

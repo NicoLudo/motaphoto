@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $taxonomies = [ 'categorie' => 'Catégories', 'format' => 'Formats' ];
 ?>
 
-<form id="gallery-filters" class="gallery-filters" aria-label="Filtres des photos">
+<form id="gallery-filters" class="gallery-filters">
     <?php foreach ( $taxonomies as $taxonomy => $label ) :
         // Remplit les listes avec les catégories et formats de WordPress
         $terms = get_terms( [ 'taxonomy' => $taxonomy, 'hide_empty' => false ] );

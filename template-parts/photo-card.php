@@ -35,7 +35,7 @@ if ( $categories && ! is_wp_error( $categories ) ) {
             href="<?php echo esc_url( get_permalink() ); ?>"
             aria-label="Voir la photo : <?php echo esc_attr( $title ); ?>"
         >
-            <svg viewBox="0 0 48 32" aria-hidden="true" focusable="false">
+            <svg viewBox="0 0 48 32" aria-hidden="true">
                 <path d="M2 16s8-13 22-13 22 13 22 13-8 13-22 13S2 16 2 16Z"/>
                 <circle cx="24" cy="16" r="7"/>
             </svg>
@@ -46,8 +46,6 @@ if ( $categories && ! is_wp_error( $categories ) ) {
             <button
                 class="photo-fullscreen"
                 type="button"
-                aria-haspopup="dialog"
-                aria-controls="lightbox"
                 aria-label="Agrandir la photo : <?php echo esc_attr( $title ); ?>"
                 data-image="<?php echo esc_url( $image_url ); ?>"
                 data-title="<?php echo esc_attr( $title ); ?>"
@@ -55,7 +53,7 @@ if ( $categories && ! is_wp_error( $categories ) ) {
                 data-reference="<?php echo esc_attr( $reference ); ?>"
                 data-category="<?php echo esc_attr( $category ); ?>"
             >
-                <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+                <svg viewBox="0 0 34 34" aria-hidden="true">
                     <circle cx="17" cy="17" r="17" fill="#000"/>
                     <path d="M14 10h-4v4m10-4h4v4M10 20v4h4m10-4v4h-4" fill="none" stroke="#fff"/>
                 </svg>

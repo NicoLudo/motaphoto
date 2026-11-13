@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="main-content" class="site-main">
+<main class="site-main">
     <?php if ( have_posts() ) : ?>
         <?php if ( ! is_singular() ) : ?>
             <h1><?php echo is_search() ? 'Résultats de recherche' : 'Publications'; ?></h1>

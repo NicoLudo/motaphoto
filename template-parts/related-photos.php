@@ -37,8 +37,8 @@ if ( ! $related_photos->have_posts() ) {
 }
 ?>
 
-<section class="related-photos" aria-labelledby="related-photos-title">
-    <h2 id="related-photos-title">Vous aimerez aussi</h2>
+<section class="related-photos">
+    <h2>Vous aimerez aussi</h2>
 
     <div class="photo-grid">
         <?php

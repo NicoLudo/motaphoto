@@ -27,8 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         body.set('page', String(page));
 
         button.setAttribute('aria-disabled', 'true');
-        grid.setAttribute('aria-busy', 'true');
-        status.classList.remove('visually-hidden');
         status.textContent = 'Chargement en cours…';
 
         try {
@@ -57,13 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             button.dataset.page = String(page);
             appliedFilters = filters;
-            const count = grid.children.length;
 
-            // Le compteur de réussite est réservé aux lecteurs d’écran
-            status.classList.toggle('visually-hidden', count > 0);
-            status.textContent = count
-                ? `Photos affichées : ${count}`
-                : 'Aucune photo ne correspond à ces critères';
+            status.textContent = grid.children.length ? '' : 'Aucune photo ne correspond à ces critères';
 
             // Si le bouton va disparaître, le clavier continue sur les photos
             if (!reset && !data.has_more && document.activeElement === button) {
@@ -81,14 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (field) field.value = value;
             }
 
-            status.classList.remove('visually-hidden');
             status.textContent = 'Chargement impossible. Réessaie ou actualise la page.';
         } finally {
             // Une ancienne demande ne doit pas arrêter l'indicateur de la nouvelle
             if (controller === request) {
                 controller = null;
                 button.removeAttribute('aria-disabled');
-                grid.setAttribute('aria-busy', 'false');
             }
         }
     }

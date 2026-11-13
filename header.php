@@ -16,8 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link" href="#main-content">Aller au contenu</a>
-
 <?php // Logo et menu réglables dans WordPress ?>
 <header class="site-header">
     <div class="header-inner">
@@ -30,14 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
 
         <?php if ( has_nav_menu( 'main-menu' ) ) : ?>
-            <?php // Le bouton annonce l’état du menu aux lecteurs d’écran ?>
-            <button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Ouvrir le menu">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Menu principal">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <nav id="primary-navigation" class="primary-navigation" aria-label="<?php esc_attr_e( 'Menu principal', 'motaphoto' ); ?>">
+            <nav class="primary-navigation" aria-label="Menu principal">
                 <?php
                 wp_nav_menu(
                     [

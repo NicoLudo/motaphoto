@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="main-content" class="site-main photo-main">
+<main class="site-main photo-main">
     <?php
     while ( have_posts() ) :
         the_post();
@@ -65,8 +65,6 @@ get_header();
                     href="#contact"
                     class="photo-contact-button"
                     data-photo-reference="<?php echo esc_attr( $reference ); ?>"
-                    aria-haspopup="dialog"
-                    aria-controls="contact-modal"
                 >
                     Contact
                 </a>
@@ -89,7 +87,7 @@ get_header();
                             href="<?php echo esc_url( get_permalink( $photo->ID ) ); ?>"
                             aria-label="<?php echo esc_attr( $label ); ?> : <?php echo esc_attr( get_the_title( $photo->ID ) ); ?>"
                         >
-                            <span class="photo-nav-arrow" aria-hidden="true"><?php echo $arrow; ?></span>
+                            <?php echo $arrow; ?>
 
                             <?php
                             echo get_the_post_thumbnail(

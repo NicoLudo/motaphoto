@@ -121,10 +121,6 @@
         .photo-nav-preview {
             opacity: 1;
         }
-
-        .photo-nav-arrow {
-            transform: scaleX(1.15);
-        }
     }
 
     &:focus-visible {
@@ -135,10 +131,6 @@
 
 .photo-nav-next {
     margin-left: auto;
-}
-
-.photo-nav-arrow {
-    transition: transform 0.2s;
 }
 
 // Superpose la miniature sans déplacer les flèches

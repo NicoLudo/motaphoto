@@ -11,8 +11,8 @@ function motaphoto_setup() {
 
     register_nav_menus(
         [
-            'main-menu'   => __( 'Menu principal', 'motaphoto' ),
-            'footer-menu' => __( 'Menu du pied de page', 'motaphoto' ),
+            'main-menu'   => 'Menu principal',
+            'footer-menu' => 'Menu du pied de page',
         ]
     );
 }

@@ -15,26 +15,24 @@ if ( ! defined( 'ABSPATH' ) ) {
     <button
         class="lightbox-nav lightbox-prev"
         type="button"
-        aria-label="Photo précédente"
         hidden
     >
-        <span aria-hidden="true">←</span>
+        <span class="lightbox-arrow" aria-hidden="true">←</span>
         <span>Précédente</span>
     </button>
 
     <button
         class="lightbox-nav lightbox-next"
         type="button"
-        aria-label="Photo suivante"
         hidden
     >
         <span>Suivante</span>
-        <span aria-hidden="true">→</span>
+        <span class="lightbox-arrow" aria-hidden="true">→</span>
     </button>
 
     <?php // L’image est ajoutée ici au moment de l’ouverture ?>
     <figure class="lightbox-content">
-        <div class="lightbox-media" aria-busy="false"></div>
+        <div class="lightbox-media"></div>
 
         <figcaption class="lightbox-caption">
             <h2 id="lightbox-title" class="lightbox-title"></h2>

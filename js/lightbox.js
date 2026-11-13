@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const previous = lightbox.querySelector('.lightbox-prev');
     const next = lightbox.querySelector('.lightbox-next');
 
-    let trigger = null;
     let loadId = 0;
     let photoButtons = [];
     let currentIndex = 0;
@@ -19,11 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPhoto(button) {
         const currentLoad = ++loadId;
         const image = new Image();
-        const position = `${currentIndex + 1} sur ${photoButtons.length}`;
 
         media.replaceChildren();
-        media.setAttribute('aria-busy', 'true');
-        status.classList.remove('visually-hidden');
         status.textContent = 'Chargement de la photo…';
 
         title.textContent = button.dataset.title;
@@ -36,9 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentLoad !== loadId || !lightbox.open) return;
 
             if (loaded) media.replaceChildren(image);
-            media.setAttribute('aria-busy', 'false');
-            status.classList.toggle('visually-hidden', loaded);
-            status.textContent = loaded ? `Photo ${position}` : 'Impossible de charger cette photo';
+            status.textContent = loaded ? '' : 'Impossible de charger cette photo';
         }
 
         image.onload = () => finishLoading(true);
@@ -72,10 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         previous.hidden = hideNavigation;
         next.hidden = hideNavigation;
 
-        trigger = button;
-        showPhoto(button);
         lightbox.showModal();
         document.body.classList.add('is-lightbox-open');
+        showPhoto(button);
     });
 
     previous.addEventListener('click', () => changePhoto(-1));
@@ -96,24 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.close();
     });
 
-    lightbox.addEventListener('click', (event) => {
-        if (event.target === lightbox) lightbox.close();
-    });
-
-    // Invalide le chargement et rend le focus au bouton qui a ouvert la fenêtre
+    // Invalide le chargement à la fermeture
     lightbox.addEventListener('close', () => {
         loadId++;
         photoButtons = [];
         media.replaceChildren();
-        media.setAttribute('aria-busy', 'false');
         status.textContent = '';
         document.body.classList.remove('is-lightbox-open');
-
-        const target = trigger?.isConnected
-            ? trigger
-            : document.querySelector('#gallery-filters select, .photo-card-link');
-
-        target?.focus({ preventScroll: true });
-        trigger = null;
     });
 });

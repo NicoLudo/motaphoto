@@ -19,24 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
             field.value = photoReference;
         }
 
-        // Le dialogue natif gère Échap et le clavier peut commencer sur le nom
         contactModal.showModal();
         document.body.classList.add('is-contact-open');
-        contactModal.querySelector('input[name="your-name"]')?.focus();
     });
 
     contactModal.querySelector('.contact-close')?.addEventListener('click', () => contactModal.close());
-
-    // Vérifie les bords pour distinguer le fond d'un clic dans le cadre
-    contactModal.addEventListener('click', (event) => {
-        if (event.target !== contactModal) return;
-        const box = contactModal.getBoundingClientRect();
-
-        const outside = event.clientX < box.left || event.clientX > box.right ||
-            event.clientY < box.top || event.clientY > box.bottom;
-
-        if (outside) contactModal.close();
-    });
 
     // Sur mobile, le lien du menu fermé n'est plus accessible au clavier
     contactModal.addEventListener('close', () => {
@@ -44,8 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (contactTrigger?.closest('.primary-navigation') && mobileScreen.matches) {
             document.querySelector('.menu-toggle')?.focus();
-        } else {
-            contactTrigger?.focus();
         }
     });
 });

@@ -7,7 +7,6 @@ Description: Thème custom pour le site de Nathalie Mota
 Version: 0.2.0
 Requires at least: 6.0
 Requires PHP: 8.0
-Text Domain: motaphoto
 */
 @font-face {
   font-family: "Space Mono";
@@ -87,15 +86,6 @@ h1 {
   line-height: 1.2;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .site-header {
   position: relative;
   z-index: 30;
@@ -163,19 +153,6 @@ h1 {
 :focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 5px;
-}
-
-.skip-link {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 100000;
-  padding: 10px 16px;
-  background: #fff;
-  transform: translateY(-200%);
-}
-.skip-link:focus {
-  transform: translateY(0);
 }
 
 .site-footer {
@@ -597,9 +574,6 @@ body.is-contact-open {
 .photo-nav-link:hover .photo-nav-preview, .photo-nav-link:focus-visible .photo-nav-preview {
   opacity: 1;
 }
-.photo-nav-link:hover .photo-nav-arrow, .photo-nav-link:focus-visible .photo-nav-arrow {
-  transform: scaleX(1.15);
-}
 .photo-nav-link:focus-visible {
   outline: 2px solid #000;
   outline-offset: 3px;
@@ -607,10 +581,6 @@ body.is-contact-open {
 
 .photo-nav-next {
   margin-left: auto;
-}
-
-.photo-nav-arrow {
-  transition: transform 0.2s;
 }
 
 .photo-nav-preview {
@@ -1049,7 +1019,7 @@ body.is-contact-open {
 .lightbox-nav[hidden] {
   display: none;
 }
-.lightbox-nav span[aria-hidden] {
+.lightbox-nav .lightbox-arrow {
   font-size: 24px;
   line-height: 1;
 }
